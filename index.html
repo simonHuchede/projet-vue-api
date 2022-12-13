@@ -11,6 +11,10 @@
     />
     <title>Geocode</title>
     <style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+		body{
+			font-family: 'Roboto';
+		}
       #demo {
         font-family: "Helvetica", Arial, sans-serif;
       }
@@ -26,33 +30,45 @@
 		display: flex;
 		justify-content: center;
 	  }
+	  h1{
+		text-align: center;
+	  }
+	  .container-inputs{
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+	  }
+	  .container-inputs > input {
+		width: 20%;
+		height: 20px;
+	  }
     </style>
   </head>
   <body v-on:click.prevent>
     <div id="demo">
       <h1>Localiser une adresse</h1>
-
-      <label :for="street">Rue : </label>
-
-      <input
-        type="text"
-        :id="street"
-        :value="street"
-        name="street"
-        v-model="street"
-      />
-      <p></p>
-      <label :for="postalCode">Code postale : </label>
-
-      <input
-        type="text"
-        :id="postalCode"
-        :value="postalCode"
-        name="postalCode"
-        v-model="postalCode"
-      />
-      <p></p>
-      <button @click="fetchGeocodeAsync">Envoyer</button>
+	<div class="container-inputs">
+		<label :for="street">Rue : </label>
+		<input
+		  type="text"
+		  :id="street"
+		  :value="street"
+		  name="street"
+		  v-model="street"
+		/>
+		<br>
+		<label :for="postalCode">Code postale : </label>
+		<input
+		  type="text"
+		  :id="postalCode"
+		  :value="postalCode"
+		  name="postalCode"
+		  v-model="postalCode"
+		/>
+		<br>
+		<button @click="fetchGeocodeAsync">Envoyer</button>
+	</div>
 	  <div class="container-history" >
 		<ul v-for="geocode in geocodeHistory" class="history_geocode">
 			<li @click="setMarkerFromHistory(geocode)"> {{geocode.street}}</li>
