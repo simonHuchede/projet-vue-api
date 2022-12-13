@@ -9,18 +9,6 @@
 			#demo {
 				font-family: "Helvetica", Arial, sans-serif;
 			}
-			a {
-				text-decoration: none;
-				color: #f66;
-			}
-			li {
-				line-height: 1.5em;
-				margin-bottom: 20px;
-			}
-			.author,
-			.date {
-				font-weight: bold;
-			}
             #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
             height:400px;
         }
@@ -80,25 +68,15 @@
                             const response = await axios.get(apiURL + this.street + "&postcode=" + this.postalCode)
                             reponse = response.data;
 							console.log(response.data)
-							this.lat = reponse.features[0].properties.x
-							this.lon = reponse.features[0].properties.y
+							this.lat = reponse.features[0].geometry.coordinates[1]
+							this.lon = reponse.features[0].geometry.coordinates[0]
+							this.macarte.setView([this.lat, this.lon], 11);
 							this.marker = L.marker([this.lat, this.lon]).addTo(this.macarte);
-							this.initMap()
                         } catch(error){
                             console.log(error);
                         }
                     },
-					formattedMessage: function (message) {
-						const newline = message.indexOf("\n");
-						return newline > 0 ? message.slice(0, newline) : message;
-					},
-					formattedDate: function (date) {
-						return date.replace(/T|Z/g, " ");
-					},
 					initMap : function () {
-						if(this.macarte){
-							this.macarte.remove()
-						}
 						// Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
 						this.macarte = L.map('map').setView([this.lat, this.lon], 11);
                 		// Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
