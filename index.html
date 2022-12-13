@@ -28,8 +28,8 @@
     <div id="demo">
       <h1>Localiser une adresse</h1>
 
-      <label :for="street">Rue</label>
-      <p></p>
+      <label :for="street">Rue : </label>
+
       <input
         type="text"
         :id="street"
@@ -38,8 +38,8 @@
         v-model="street"
       />
       <p></p>
-      <label :for="postalCode">Code postale</label>
-      <p></p>
+      <label :for="postalCode">Code postale : </label>
+
       <input
         type="text"
         :id="postalCode"
@@ -47,6 +47,7 @@
         name="postalCode"
         v-model="postalCode"
       />
+      <p></p>
       <button @click="fetchGeocodeAsync">Envoyer</button>
 	  <div class="container-history" >
 		<ul v-for="geocode in geocodeHistory" class="history_geocode">
